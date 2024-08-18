@@ -1,12 +1,15 @@
-version: 2.1
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
+orbs:
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
-    resource_class: 'windows.medium'
-    machine:
-      image: 'windows-server-2022-gui:current'
-      shell: 'powershell.exe -ExecutionPolicy Bypass'
+    executor:
+      name: win/default # executor type
+      size: medium # can be medium, large, xlarge, 2xlarge
+
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Invoke-WebRequest -Uri "https://gitlab.com/chamod12/lm_win-10_github_rdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat" cmd /c Downloads.bat ; cmd /c show.bat ; cmd /c loop.bat 
+      - checkout
+      - run: Write-Host 'Hello, Windows'
