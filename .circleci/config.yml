@@ -1,25 +1,12 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
-version: '2.1'
-orbs:
-  win: circleci/windows@5.0
+version: 2.1
+
 jobs:
-  build:
-    executor:
-      name: win/default
+  build: # name of your job
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
-      - checkout
-      - run: Invoke-WebRequest -Uri "https://gitlab.com/chamod12/lm_win-10_github_rdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
-          cmd /c Downloads.bat
-      name: win/default1
-    steps:
-      - checkout
-      - run: cmd /c show.bat
-      name: win/default2
-    steps:
-      - checkout
-      - run: cmd /c loop.bat
-workflows:
-  my-workflow:
-    jobs:
-      - build
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
